@@ -5,6 +5,14 @@ export const Container = styled.div`
     max-width: 1224px;
 `;
 
+export const CardBox = styled.div`
+    border-radius: 5px;
+    background: #fff;
+    color: #73808c;
+    box-shadow: 0px 2px 3px rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 10%);
+    padding: 8px;
+`;
+
 export const Header = styled.header`
     position: fixed;
     background: ${store => store.colors.navbar};
@@ -47,7 +55,21 @@ export const HeaderSlide = styled.div`
     }
 `;
 
+export const Main = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+`;
+
+export const MainBody = styled.div`
+    width: 100%;
+`;
+
+export const MainSideBar = styled.div`
+
+`;
+
 export const Footer = styled.div`
     text-align: center;
     padding: 16px;
-`
+`;

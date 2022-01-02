@@ -11,6 +11,7 @@ import './App.css'
 var storeInstance = {
   name: "Minecart",
   storeIp: "jogar.snowdev.com.br",
+  discord: "451861943364616192",
   layout: "default",
   logo: "https://cdn.minecart.com.br/assets/img/logo.png",
   background: "https://cdn.minecart.com.br/assets/img/slide/slide-default-1.png",
@@ -24,9 +25,14 @@ export default () => {
     <Router>
       <Layout exact path="/" store={storeInstance} component={Index} />
       <Layout path="/shop" store={storeInstance} component={Server} />
-      <Layout path="/shop/:shop" store={storeInstance} component={ServerShop} />
+      <Layout path="/shop/:shop" store={storeInstance} renderSideBar={renderSideBar()} component={ServerShop} />
       <Layout path="/rules" store={storeInstance} component={Rule} />
       <Layout path="/team" store={storeInstance} component={Team} />
     </Router>
   );
+}
+
+function renderSideBar()
+{
+  return false;
 }

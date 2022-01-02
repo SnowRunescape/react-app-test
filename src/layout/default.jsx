@@ -1,14 +1,23 @@
 import Footer from '../components/shop/template/default/Footer';
 import Header from '../components/shop/template/default/Header';
-import { Container } from '../components/shop/template/default/styles'
+import MainSideBar from '../components/shop/template/default/SideBar';
+import { Container, Main, MainBody } from '../components/shop/template/default/styles'
 
 export default (props) => {
     return (
         <>
             <Header {...props}/>
+
             <Container>
-                {props.children}
+                <Main>
+                    <MainBody>
+                        {props.children}
+                    </MainBody>
+
+                    <MainSideBar {...props}/>
+                </Main>
             </Container>
+
             <Footer {...props}/>
         </>
     );
