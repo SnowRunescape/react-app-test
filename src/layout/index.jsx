@@ -19,7 +19,7 @@ export default (props) => {
     return (
         <Route exact={exact} path={path} render={() => (
             <Template {...props}>
-              <Component/>
+              <Component {...props}/>
             </Template>)}
         />
     )

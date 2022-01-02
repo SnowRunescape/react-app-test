@@ -1,16 +1,18 @@
 import {useState, useEffect} from 'react'
 import CardBoxNews from '../components/shop/template/.global/CardBoxNews'
-import MinecartAPI from '../services/api'
+import { getRules } from '../services/MinecartAPI'
 import CardBoxNewsLoading from '../components/shop/template/.global/CardBoxNewsLoading'
 import CardBoxError from '../components/shop/template/.global/CardBoxError'
 
-export default (props) => {
+export default ({store}) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect (() => {
-        MinecartAPI.getRules().then(function (response) {
+        document.title = `${store.name} | Página Inicial`
+
+        getRules().then(function (response) {
             setData(response.data)
             setLoading(false)
         }).catch(function (response) {

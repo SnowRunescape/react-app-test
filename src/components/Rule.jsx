@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import api from '../services/api'
+import { getRules } from '../services/MinecartAPI'
 
 export default () => {
     const [data, setData] = useState([])
@@ -7,7 +7,7 @@ export default () => {
     const [error, setError] = useState(false)
 
     useEffect (() => {
-        api.getRules().then(function (response) {
+        getRules().then(function (response) {
             setData(response.data)
             setLoading(false)
         }).catch(function (response) {

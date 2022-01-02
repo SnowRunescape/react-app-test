@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Index from './pages/index'
 import Server from './pages/server'
@@ -7,20 +7,25 @@ import Rule from './pages/rule'
 import Team from './pages/team'
 import Layout from "./layout";
 import './App.css'
+import { getStore } from "./services/MinecartAPI";
 
-var storeInstance = {
-  name: "Minecart",
-  storeIp: "jogar.snowdev.com.br",
-  discord: "451861943364616192",
-  layout: "default",
-  logo: "https://cdn.minecart.com.br/assets/img/logo.png",
-  background: "https://cdn.minecart.com.br/assets/img/slide/slide-default-1.png",
-  colors: {
-    navbar: "#662780"
-  }
-}
+const favicon = document.getElementById("favicon")
 
 export default () => {
+  const [storeInstance, setStoreInstance] = useState([])
+
+  useEffect (() => {
+    let store = getStore()
+
+    favicon.href = store.favicon
+
+    setStoreInstance(store)
+  }, [])
+
+  if (storeInstance.length ==0) {
+    return "carregando";
+  }
+
   return (
     <Router>
       <Layout exact path="/" store={storeInstance} component={Index} />
