@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Header, HeaderContianer, HeaderLeft, HeaderRight, HeaderLogo, HeaderSlide, Container } from './styles'
+import { Header, HeaderContianer, HeaderLeft, HeaderRight, HeaderLogo, HeaderSlide, Container } from '../../../../layout/default/styles'
 
 export default ({store}) => {
     return (

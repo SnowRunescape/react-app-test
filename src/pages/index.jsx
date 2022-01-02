@@ -1,14 +1,16 @@
 import {useState, useEffect} from 'react'
-import CardBoxNews from '../components/shop/CardBoxNews'
-import api from '../services/api'
+import CardBoxNews from '../components/shop/template/.global/CardBoxNews'
+import MinecartAPI from '../services/api'
+import CardBoxNewsLoading from '../components/shop/template/.global/CardBoxNewsLoading'
+import CardBoxError from '../components/shop/template/.global/CardBoxError'
 
-export default () => {
+export default (props) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect (() => {
-        api.getRules().then(function (response) {
+        MinecartAPI.getRules().then(function (response) {
             setData(response.data)
             setLoading(false)
         }).catch(function (response) {
@@ -18,11 +20,19 @@ export default () => {
     }, [])
 
     if (loading) {
-        return ("caregando...");
+        return (
+            <CardBoxNewsLoading/>
+        )
     }
 
     if (error) {
-        return ("error...");
+        return (
+            <CardBoxError title="Nenhuma notícia publicada" description="Não foi publicado nenhuma notícia ate o momento!"/>
+        )
+    }
+
+    if (data.length == 0) {
+        return ("Nenhuma noticia cadastrada");
     }
 
     return (

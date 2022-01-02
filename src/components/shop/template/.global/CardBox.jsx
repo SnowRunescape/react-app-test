@@ -1,4 +1,4 @@
-import { CardBox } from '../shop/template/default/styles'
+import { CardBox } from '../../../../layout/default/styles'
 
 export default (props) => {
     return (

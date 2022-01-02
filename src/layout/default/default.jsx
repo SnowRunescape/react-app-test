@@ -1,7 +1,7 @@
-import Footer from '../components/shop/template/default/Footer';
-import Header from '../components/shop/template/default/Header';
-import MainSideBar from '../components/shop/template/default/SideBar';
-import { Container, Main, MainBody } from '../components/shop/template/default/styles'
+import Footer from '../../components/shop/template/default/Footer';
+import Header from '../../components/shop/template/default/Header';
+import MainSideBar from '../../components/shop/template/default/SideBar';
+import { Container, Main, MainBody } from './styles'
 
 export default (props) => {
     return (

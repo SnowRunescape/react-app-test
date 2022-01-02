@@ -1,6 +1,6 @@
 import {Route} from "react-router-dom";
-import TemplateDefault from './default'
-import TemplateTranscend from './transcend'
+import TemplateDefault from './default/default'
+import TemplateTranscend from './transcend/transcend'
 
 const templates = {
     default: TemplateDefault,

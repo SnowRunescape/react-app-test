@@ -1,4 +1,4 @@
-import { Footer } from './styles'
+import { Footer } from '../../../../layout/default/styles'
 
 export default ({store}) => {
     return (
