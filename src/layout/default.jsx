@@ -1,18 +1,15 @@
-import TranscendFooter from "../components/TranscendFooter";
-import TranscendHeader from "../components/TranscendHeader";
+import Footer from '../components/shop/template/default/Footer';
+import Header from '../components/shop/template/default/Header';
+import { Container } from '../components/shop/template/default/styles'
 
-export default ({children}) => {
+export default (props) => {
     return (
         <>
-            <div style={{
-                borderRadius: 5,
-                width: '5px'
-            }}>
-
-            </div>
-            <TranscendHeader/>
-            {children}
-            <TranscendFooter/>
+            <Header {...props}/>
+            <Container>
+                {props.children}
+            </Container>
+            <Footer {...props}/>
         </>
     );
 }

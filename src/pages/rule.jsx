@@ -1,12 +1,7 @@
 import {useState, useEffect} from 'react'
-import RoleAzul from '../components/RoleAzul'
-import RoleRed from '../components/RoleRed'
+import RoleRed from '../components/Rule'
 
 
-export default ({layout}) => {
-    if (layout == "default") {
-        return <RoleAzul />
-    }
-
+export default () => {
     return <RoleRed />
 }

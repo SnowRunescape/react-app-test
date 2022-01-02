@@ -1,18 +1,12 @@
-import TranscendFooter from "../components/TranscendFooter";
-import TranscendHeader from "../components/TranscendHeader";
+import Footer from "../components/shop/template/transcend/Footer";
+import Header from "../components/shop/template/transcend/Header";
 
 export default ({children}) => {
     return (
         <>
-            <div style={{
-                borderRadius: 5,
-                width: '5px'
-            }}>
-
-            </div>
-            <TranscendHeader/>
+            <Header/>
             {children}
-            <TranscendFooter></TranscendFooter>
+            <Footer/>
         </>
     );
 }

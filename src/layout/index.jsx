@@ -2,16 +2,23 @@ import {Route} from "react-router-dom";
 import TemplateDefault from './default'
 import TemplateTranscend from './transcend'
 
-export default ({path, exact, layout, component: Component}) => {
-    let Template = template(layout);
+const templates = {
+    default: TemplateDefault,
+    transcend: TemplateTranscend
+}
 
-    if (Template === false) {
+export default (props) => {
+    const {path, exact, store, component: Component} = props
+
+    let Template = template(store.layout);
+
+    if (!Template) {
         // RENDER 503
     }
 
     return (
-        <Route exact={exact} path={path} render={props => (
-            <Template>
+        <Route exact={exact} path={path} render={() => (
+            <Template {...props}>
               <Component/>
             </Template>)}
         />
@@ -20,9 +27,5 @@ export default ({path, exact, layout, component: Component}) => {
 
 function template(layout)
 {
-    if (layout == "default" || layout == "transcend") {
-        return (layout == "default") ? TemplateDefault : TemplateTranscend;
-    }
-
-    return false;
+    return templates[layout]
 }
