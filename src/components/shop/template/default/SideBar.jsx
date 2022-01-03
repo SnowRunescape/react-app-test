@@ -1,21 +1,25 @@
-export default ({renderSideBar = true, store}) => {
-    if (renderSideBar) {
-        return (
-            <div style={{
-                maxWidth:"310px",
-            }}>
-                <Cart discordId={store.discord}/>
-                <Purchases discordId={store.discord}/>
-                <Twitter twitter={store.discord}/>
-                <Discord discord={store.discord}/>
-            </div>
-        );
-    }
+import react, { useCallback } from 'react'
 
-    return (
+
+
+export default function SideBar(props) {
+    const {renderSideBar = true, store} = props
+    const Content = useCallback(() => {
         <>
+            {
+                renderSideBar ? (<div style={{
+                    maxWidth:"310px",
+                }}>
+                    <Cart discordId={store.discord}/>
+                    <Purchases discordId={store.discord}/>
+                    <Twitter twitter={store.discord}/>
+                    <Discord discord={store.discord}/>
+                </div>) : null
+            }
         </>
-    )
+    }, [store])
+
+    return Content
 }
 
 function Cart()

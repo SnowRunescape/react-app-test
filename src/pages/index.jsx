@@ -10,8 +10,6 @@ export default ({store}) => {
     const [error, setError] = useState(false)
 
     useEffect (() => {
-        document.title = `${store.name} | Página Inicial`
-
         getRules().then(function (response) {
             setData(response.data)
             setLoading(false)
@@ -21,27 +19,37 @@ export default ({store}) => {
         })
     }, [])
 
-    if (loading) {
+    useLayoutEffect (() => {
+        document.title = `${store.name} | Página Inicial`
+    }, [])
+
+    const renderContent = () => {
         return (
-            <CardBoxNewsLoading/>
+            <>
+                {
+                    data.map(news => (
+                        <CardBoxNews key={news.id} news={news}></CardBoxNews>
+                    ))
+                }
+            </>
         )
     }
 
-    if (error) {
-        return (
-            <CardBoxError title="Nenhuma notícia publicada" description="Não foi publicado nenhuma notícia ate o momento!"/>
-        )
-    }
-
-    if (data.length == 0) {
-        return ("Nenhuma noticia cadastrada");
+    const renderError = () => {
+        return <CardBoxError
+            title="Nenhuma notícia publicada"
+            description="Não foi publicado nenhuma notícia ate o momento!"
+        />
     }
 
     return (
         <>
-            {data.map(news => (
-                <CardBoxNews key={news.id} news={news}></CardBoxNews>
-            ))}
+        {
+            loading ? <CardBoxNewsLoading/>
+                : error ? renderError()
+                : (data.length == 0) ? "Nenhuma noticia cadastrada"
+                : renderContent()
+        }
         </>
     )
 }
