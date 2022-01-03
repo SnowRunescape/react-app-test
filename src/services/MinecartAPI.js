@@ -5,7 +5,7 @@ const api = axios.create({ baseURL });
 const instance = {}
 
 export {
-    getStore, getRules, getTeam
+    getStore, getServers, getRules, getTeam
 }
 
 function getStore(force)
@@ -22,6 +22,22 @@ function getStore(force)
           navbar: "#662780"
         }
     }
+}
+
+function getServers(force)
+{
+    return [
+        {
+            "id": 1,
+            "name": "SnowMC",
+            "image": "https://cdn.minecart.com.br/assets/img/cube-server.png"
+        },
+        {
+            "id": 2,
+            "name": "Teste",
+            "image": "https://cdn.minecart.com.br/assets/img/cube-server.png"
+        }
+    ]
 }
 
 async function getRules(force)

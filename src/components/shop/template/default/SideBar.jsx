@@ -1,25 +1,19 @@
-import react, { useCallback } from 'react'
-
-
-
 export default function SideBar(props) {
-    const {renderSideBar = true, store} = props
-    const Content = useCallback(() => {
-        <>
-            {
-                renderSideBar ? (<div style={{
-                    maxWidth:"310px",
-                }}>
-                    <Cart discordId={store.discord}/>
-                    <Purchases discordId={store.discord}/>
-                    <Twitter twitter={store.discord}/>
-                    <Discord discord={store.discord}/>
-                </div>) : null
-            }
-        </>
-    }, [store])
+    const {renderSideBar = true , store} = props
 
-    return Content
+    return renderSideBar ? renderContent(store) : null
+}
+
+function renderContent(store)
+{
+    return (
+        <div maxWidth={310}>
+            <Cart discordId={store.discord}/>
+            <Purchases discordId={store.discord}/>
+            <Twitter twitter={store.discord}/>
+            <Discord discord={store.discord}/>
+        </div>
+    )
 }
 
 function Cart()
@@ -31,15 +25,11 @@ function Cart()
 
 function Discord({discord})
 {
-    if (discord.length < 1) {
-        return
-    }
-
-    return (
+    return (discord.length > 0) ? (
         <div>
             <iframe src={`https://discordapp.com/widget?id=${discord}&theme=dark`} width="100%" height="415" allowtransparency="true" frameBorder="0"/>
         </div>
-    )
+    ) : null
 }
 
 function Twitter()

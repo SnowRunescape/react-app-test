@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import CardBoxNews from '../components/shop/template/.global/News/CardBoxNews'
 import { getRules } from '../services/MinecartAPI'
 import CardBoxNewsLoading from '../components/shop/template/.global/News/CardBoxNewsLoading'
@@ -35,21 +35,22 @@ export default ({store}) => {
         )
     }
 
-    const renderError = () => {
+    const renderEmptyContent = () => {
         return <CardBoxError
             title="Nenhuma notícia publicada"
             description="Não foi publicado nenhuma notícia ate o momento!"
         />
     }
 
-    return (
-        <>
-        {
-            loading ? <CardBoxNewsLoading/>
-                : error ? renderError()
-                : (data.length == 0) ? "Nenhuma noticia cadastrada"
-                : renderContent()
-        }
-        </>
-    )
+    const renderError = () => {
+        return <CardBoxError
+            title="Aconteceu um erro"
+            description="Não foi possivel carregar as noticias, tente novamente!"
+        />
+    }
+
+    return loading ? <CardBoxNewsLoading/>
+        : error ? renderError()
+        : (data.length == 0) ? renderEmptyContent()
+        : renderContent()
 }

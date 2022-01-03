@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react'
-import CardBoxTeam from '../components/shop/template/.global/Team/CardBoxTeam'
+import { useState, useEffect, useLayoutEffect } from 'react'
+import CardBoxTeam from '../components/shop/template/.global/CardBoxTeam'
 import { getTeam } from '../services/MinecartAPI'
 import CardBoxNewsLoading from '../components/shop/template/.global/News/CardBoxNewsLoading'
 import CardBoxError from '../components/shop/template/.global/CardBoxError'
@@ -10,25 +10,33 @@ export default ({store}) => {
     const [error, setError] = useState(false)
 
     useEffect (() => {
-        document.title = `${store.name} | Equipe`
-
         setData(getTeam())
     }, [])
 
+    useLayoutEffect (() => {
+        document.title = `${store.name} | Equipe`
+    }, [])
+
     if (loading) {
-        return (
-            <CardBoxNewsLoading/>
-        )
+        return <CardBoxNewsLoading/>
     }
 
     if (error) {
         return (
-            <CardBoxError title="Nenhuma notícia publicada" description="Não foi publicado nenhuma notícia ate o momento!"/>
+            <CardBoxError
+                title="Aconteceu um erro"
+                description="Não foi possivel carregar as equipes, tente novamente!"
+            />
         )
     }
 
     if (data.length == 0) {
-        return ("Nenhuma noticia cadastrada");
+        return (
+            <CardBoxError
+                title="Nenhuma notícia publicada"
+                description="Não foi publicado nenhuma notícia ate o momento!"
+            />
+        )
     }
 
     return (
