@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
 const StoreServer = styled.div`
@@ -55,13 +56,15 @@ export default (props) => {
 
     return (
         <StoreServer>
-            <div className="logo">
-                <img src={storeServer.image}/>
-            </div>
+            <Link to={`/shop/${storeServer.id}-${storeServer.name_slug}`}>
+                <div className="logo">
+                    <img src={storeServer.image}/>
+                </div>
 
-            <div className="serverName">
-                <span>{storeServer.name}</span>
-            </div>
+                <div className="serverName">
+                    <span>{storeServer.name}</span>
+                </div>
+            </Link>
         </StoreServer>
     )
 }
