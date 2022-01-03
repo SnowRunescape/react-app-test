@@ -5,7 +5,7 @@ const api = axios.create({ baseURL });
 const instance = {}
 
 export {
-    getStore, getRules
+    getStore, getRules, getTeam
 }
 
 function getStore(force)
@@ -31,4 +31,36 @@ async function getRules(force)
     }
 
     return instance.rules
+}
+
+function getTeam(force)
+{
+    return [
+        {
+            "id": 1,
+            "name": "Diretor",
+            "color": "red",
+            "members": [
+                {
+                    "id": 1,
+                    "name": "Bruno"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Helper",
+            "color": "blue",
+            "members": [
+                {
+                    "id": 2,
+                    "name": "Trojan"
+                },
+                {
+                    "id": 3,
+                    "name": "SnowDev"
+                }
+            ]
+        }
+    ]
 }

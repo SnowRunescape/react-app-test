@@ -1,4 +1,4 @@
-import CardBox from "./CardBox"
+import CardBox from "../CardBox"
 
 export default ({news}) => {
     return (

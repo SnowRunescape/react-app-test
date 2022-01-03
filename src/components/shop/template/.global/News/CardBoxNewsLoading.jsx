@@ -1,4 +1,4 @@
-import CardBox from "./CardBox"
+import CardBox from "../CardBox"
 import ContentLoader from "react-content-loader"
 
 export default (props) => {

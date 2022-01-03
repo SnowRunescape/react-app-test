@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
-import CardBoxNews from '../components/shop/template/.global/CardBoxNews'
+import CardBoxNews from '../components/shop/template/.global/News/CardBoxNews'
 import { getRules } from '../services/MinecartAPI'
-import CardBoxNewsLoading from '../components/shop/template/.global/CardBoxNewsLoading'
+import CardBoxNewsLoading from '../components/shop/template/.global/News/CardBoxNewsLoading'
 import CardBoxError from '../components/shop/template/.global/CardBoxError'
 
 export default ({store}) => {

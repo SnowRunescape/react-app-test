@@ -11,6 +11,10 @@ export const CardBox = styled.div`
     color: #73808c;
     box-shadow: 0px 2px 3px rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 10%);
     padding: 8px;
+
+    :not(:first-of-type) {
+        margin-top: 16px;
+    }
 `;
 
 export const Header = styled.header`
