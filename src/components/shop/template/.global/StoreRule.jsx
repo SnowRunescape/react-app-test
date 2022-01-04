@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import FadeInOut from "../../../FadeInOut";
 import styled from 'styled-components'
+import Button from '../../../Button';
 
 const Rule = styled.div`
     text-align: center;
@@ -43,7 +43,8 @@ export default (props) => {
             <div className="title">{rule.rule}</div>
             <div className="description">{rule.description}</div>
 
-            <button onClick={toggleVisible}>Punição</button>
+            <Button variant="danger" onClick={toggleVisible}>Punição</Button>
+
             <FadeInOut show={visible} duration={500}>
                 <div className="punishment">{rule.punishment}</div>
             </FadeInOut>
