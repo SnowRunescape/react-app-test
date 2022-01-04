@@ -1,12 +1,14 @@
 import { useState, useEffect, useLayoutEffect } from 'react'
 import CardBoxTeam from '../components/shop/template/.global/CardBoxTeam'
 import { getTeams } from '../services/MinecartAPI'
-import CardBoxNewsLoading from '../components/shop/template/.global/News/CardBoxNewsLoading'
+import CardBoxTeamLoading from '../components/shop/template/.global/News/CardBoxTeamLoading'
 import CardBoxError from '../components/shop/template/.global/CardBoxError'
 
-export default ({store}) => {
+export default (props) => {
+    const { store } = props
+
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect (() => {
@@ -23,33 +25,32 @@ export default ({store}) => {
         document.title = `${store.name} | Equipe`
     }, [])
 
-    if (loading) {
-        return <CardBoxNewsLoading/>
-    }
-
-    if (error) {
+    const renderContent = () => {
         return (
-            <CardBoxError
-                title="Aconteceu um erro"
-                description="Não foi possivel carregar as equipes, tente novamente!"
-            />
+            <>
+                {Object.entries(data).map(([teamId, team]) => (
+                    <CardBoxTeam key={teamId} team={team}></CardBoxTeam>
+                ))}
+            </>
         )
     }
 
-    if (data.length == 0) {
-        return (
-            <CardBoxError
-                title="Nenhuma notícia publicada"
-                description="Não foi publicado nenhuma notícia ate o momento!"
-            />
-        )
+    const renderEmptyContent = () => {
+        return <CardBoxError
+            title="Nenhuma equipes criada"
+            description="Não foi criada nenhuma equipes ate o momento!"
+        />
     }
 
-    return (
-        <>
-            {Object.entries(data).map(([teamId, team]) => (
-                <CardBoxTeam key={teamId} team={team}></CardBoxTeam>
-            ))}
-        </>
-    )
+    const renderError = () => {
+        return <CardBoxError
+            title="Aconteceu um erro"
+            description="Não foi possivel carregar as equipes, tente novamente!"
+        />
+    }
+
+    return loading ? <CardBoxTeamLoading/>
+        : error ? renderError()
+        : (data.length == 0) ? renderEmptyContent()
+        : renderContent()
 }
