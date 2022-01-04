@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const baseURL = "http://minecart.local/api";
+const baseURL = "http://minecart.local/api/v1";
 const api = axios.create({ baseURL });
 const instance = {}
 
 export {
-    getStore, getServers, getRules, getTeam
+    getStore, getNews, getServers, getServerProducts, getRules, getTeams
 }
 
 function getStore(force)
@@ -24,59 +24,44 @@ function getStore(force)
     }
 }
 
-function getServers(force)
+async function getNews(force)
 {
-    return [
-        {
-            "id": 1,
-            "name": "SnowMC",
-            "image": "https://cdn.minecart.com.br/assets/img/cube-server.png"
-        },
-        {
-            "id": 2,
-            "name": "Teste",
-            "image": "https://cdn.minecart.com.br/assets/img/cube-server.png"
-        }
-    ]
+    if (!instance.news || force) {
+        instance.news = await api.get("/store/news")
+    }
+
+    return instance.news
+}
+
+
+async function getServers(force)
+{
+    if (!instance.servers || force) {
+        instance.servers = await api.get("/store/servers")
+    }
+
+    return instance.servers
+}
+
+async function getServerProducts(force)
+{
+    await api.get("/store/news")
 }
 
 async function getRules(force)
 {
     if (!instance.rules || force) {
-        instance.rules = await api.get("/temp/rules")
+        instance.rules = await api.get("/store/rules")
     }
 
     return instance.rules
 }
 
-function getTeam(force)
+async function getTeams(force)
 {
-    return [
-        {
-            "id": 1,
-            "name": "Diretor",
-            "color": "red",
-            "members": [
-                {
-                    "id": 1,
-                    "name": "Bruno"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "name": "Helper",
-            "color": "blue",
-            "members": [
-                {
-                    "id": 2,
-                    "name": "Trojan"
-                },
-                {
-                    "id": 3,
-                    "name": "SnowDev"
-                }
-            ]
-        }
-    ]
+    if (!instance.teams || force) {
+        instance.teams = await api.get("/store/teams")
+    }
+
+    return instance.teams
 }

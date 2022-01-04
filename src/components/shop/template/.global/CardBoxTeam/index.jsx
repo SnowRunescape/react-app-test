@@ -4,14 +4,14 @@ export default ({team}) => {
     return (
         <CardBoxTeam {...team}>
             <div className="title">
-                {team.name}
+                {team.team}
             </div>
 
             <div className="container">
-                {team.members.map(member => (
-                    <div key={member.id} className="member">
-                        <img src={`https://mc-heads.net/avatar/${member.name}/64`}/>
-                        <p>{member.name}</p>
+                {Object.entries(team.members).map(([memberId, member]) => (
+                    <div key={memberId} className="member">
+                        <img src={`https://mc-heads.net/avatar/${member}/64`}/>
+                        <p>{member}</p>
                     </div>
                 ))}
             </div>

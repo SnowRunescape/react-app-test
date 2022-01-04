@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect } from 'react'
 import CardBoxNews from '../components/shop/template/.global/News/CardBoxNews'
-import { getRules } from '../services/MinecartAPI'
+import { getNews } from '../services/MinecartAPI'
 import CardBoxNewsLoading from '../components/shop/template/.global/News/CardBoxNewsLoading'
 import CardBoxError from '../components/shop/template/.global/CardBoxError'
 
@@ -10,8 +10,8 @@ export default ({store}) => {
     const [error, setError] = useState(false)
 
     useEffect (() => {
-        getRules().then(function (response) {
-            setData(response.data)
+        getNews().then(function (response) {
+            setData(response.data.news)
             setLoading(false)
         }).catch(function (response) {
             setError(true)

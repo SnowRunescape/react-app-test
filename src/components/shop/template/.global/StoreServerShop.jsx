@@ -56,16 +56,13 @@ export default (props) => {
 
     return (
         <StoreServer>
-            <Link to={`/shop/${storeServer.id}-${storeServer.server_name_slug}`}>
+            <Link to={`/shop/${storeServer.id}-${storeServer.name_slug}`}>
                 <div className="logo">
-                    <img src={storeServer.server_logo} onError={({ currentTarget }) => {
-                        currentTarget.onerror  = null;
-                        currentTarget.src = "https://cdn.minecart.com.br/assets/img/cube-server.png";
-                    }}/>
+                    <img src={storeServer.image}/>
                 </div>
 
                 <div className="serverName">
-                    <span>{storeServer.server_name}</span>
+                    <span>{storeServer.name}</span>
                 </div>
             </Link>
         </StoreServer>

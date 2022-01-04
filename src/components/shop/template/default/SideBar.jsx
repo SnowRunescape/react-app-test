@@ -7,7 +7,7 @@ export default function SideBar(props) {
 function renderContent(store)
 {
     return (
-        <div maxWidth={310}>
+        <div style={{maxWidth: 310}}>
             <Cart discordId={store.discord}/>
             <Purchases discordId={store.discord}/>
             <Twitter twitter={store.discord}/>

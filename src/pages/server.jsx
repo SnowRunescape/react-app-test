@@ -16,7 +16,13 @@ export default () => {
     const [error, setError] = useState(false)
 
     useLayoutEffect (() => {
-        setData(getServers())
+        getServers().then(function (response) {
+            setData(response.data.servers)
+            setLoading(false)
+        }).catch(function (response) {
+            setError(true)
+            setLoading(false)
+        })
     }, [])
 
     if (loading) {

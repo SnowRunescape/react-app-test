@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect } from 'react'
 import CardBoxTeam from '../components/shop/template/.global/CardBoxTeam'
-import { getTeam } from '../services/MinecartAPI'
+import { getTeams } from '../services/MinecartAPI'
 import CardBoxNewsLoading from '../components/shop/template/.global/News/CardBoxNewsLoading'
 import CardBoxError from '../components/shop/template/.global/CardBoxError'
 
@@ -10,7 +10,13 @@ export default ({store}) => {
     const [error, setError] = useState(false)
 
     useEffect (() => {
-        setData(getTeam())
+        getTeams().then(function (response) {
+            setData(response.data.teams)
+            setLoading(false)
+        }).catch(function (response) {
+            setError(true)
+            setLoading(false)
+        })
     }, [])
 
     useLayoutEffect (() => {
@@ -41,8 +47,8 @@ export default ({store}) => {
 
     return (
         <>
-            {data.map(team => (
-                <CardBoxTeam key={team.id} team={team}></CardBoxTeam>
+            {Object.entries(data).map(([teamId, team]) => (
+                <CardBoxTeam key={teamId} team={team}></CardBoxTeam>
             ))}
         </>
     )
