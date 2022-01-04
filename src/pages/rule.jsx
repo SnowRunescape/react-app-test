@@ -1,5 +1,13 @@
+import styled from 'styled-components'
+import { CardBox } from '../layout/default/styles';
 import {useState, useEffect} from 'react'
 import { getRules } from '../services/MinecartAPI'
+import StoreRule from '../components/shop/template/.global/StoreRule';
+
+const StoreRules = styled(CardBox)`
+    display: grid;
+    grid-gap: 16px;
+`;
 
 export default () => {
     const [data, setData] = useState([])
@@ -25,16 +33,10 @@ export default () => {
     }
 
     return (
-        <>
-            <h1>pagina com tela vermelha</h1>
-
+        <StoreRules>
             {data.map(rule => (
-              <div key={rule.id}>
-                  <p>{rule.id}</p>
-                  <p>{rule.title}</p>
-                  <p>{rule.punishment}</p>
-              </div>
+              <StoreRule key={rule.id} rule={rule}/>
             ))}
-        </>
+        </StoreRules>
     )
 }
