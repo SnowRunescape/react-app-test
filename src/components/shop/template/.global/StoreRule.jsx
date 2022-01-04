@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import FadeInOut from "../../../FadeInOut";
 import styled from 'styled-components'
 
 const Rule = styled.div`
@@ -23,7 +25,6 @@ const Rule = styled.div`
         margin: 0 auto;
         margin-top: 8px;
         border-radius: 4px;
-        display: none;
     }
 
     :not(:first-of-type) {
@@ -34,14 +35,18 @@ const Rule = styled.div`
 export default (props) => {
     const { rule } = props
 
+    const [visible, setVisible] = useState(false)
+    const toggleVisible = () => setVisible(!visible)
+
     return (
         <Rule key={rule.id}>
             <div className="title">{rule.rule}</div>
             <div className="description">{rule.description}</div>
 
-            <button onClick={}>Punição</button>
-
-            <div className="punishment">{rule.punishment}</div>
+            <button onClick={toggleVisible}>Punição</button>
+            <FadeInOut show={visible} duration={500}>
+                <div className="punishment">{rule.punishment}</div>
+            </FadeInOut>
         </Rule>
     )
 }
