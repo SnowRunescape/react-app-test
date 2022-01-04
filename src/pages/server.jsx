@@ -34,12 +34,10 @@ export default () => {
     }
 
     return (
-        <>
-            <StoreServers>
-                {data.map(storeServer => (
-                  <StoreServer key={storeServer.id} storeServer={storeServer}/>
-                ))}
-            </StoreServers>
-        </>
+        <StoreServers>
+            {data.map(storeServer => (
+              <StoreServer key={storeServer.id} storeServer={storeServer}/>
+            ))}
+        </StoreServers>
     )
 }
