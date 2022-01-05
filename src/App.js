@@ -29,7 +29,7 @@ export default () => {
   return (
     <Router>
       <Layout exact path="/" store={storeInstance} component={Index} />
-      <Layout path="/shop" store={storeInstance} component={Server} />
+      <Layout exact path="/shop" store={storeInstance} component={Server} />
       <Layout path="/shop/:shop" store={storeInstance} renderSideBar={renderSideBar()} component={ServerShop} />
       <Layout path="/rules" store={storeInstance} component={Rule} />
       <Layout path="/team" store={storeInstance} component={Team} />
