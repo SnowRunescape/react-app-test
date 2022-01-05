@@ -3,6 +3,8 @@ import { CardBox } from '../layout/default/styles';
 import {useState, useLayoutEffect} from 'react'
 import StoreServer from '../components/shop/template/.global/StoreServer';
 import { getServers } from '../services/MinecartAPI'
+import CardBoxError from '../components/shop/template/.global/CardBoxError';
+import CardBoxServerLoading from '../components/shop/template/.global/News/CardBoxServerLoading';
 
 const StoreServers = styled(CardBox)`
     display: grid;
@@ -12,7 +14,7 @@ const StoreServers = styled(CardBox)`
 
 export default () => {
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useLayoutEffect (() => {
@@ -25,19 +27,32 @@ export default () => {
         })
     }, [])
 
-    if (loading) {
-        return ("caregando...");
+    const renderContent = () => {
+        return (
+            <StoreServers>
+                {data.map(storeServer => (
+                  <StoreServer key={storeServer.id} storeServer={storeServer}/>
+                ))}
+            </StoreServers>
+        )
     }
 
-    if (error) {
-        return ("error...");
+    const renderEmptyContent = () => {
+        return <CardBoxError
+            title="Nenhuma Servidor criado"
+            description="Não foi criado nenhum servidor ate o momento!"
+        />
     }
 
-    return (
-        <StoreServers>
-            {data.map(storeServer => (
-              <StoreServer key={storeServer.id} storeServer={storeServer}/>
-            ))}
-        </StoreServers>
-    )
+    const renderError = () => {
+        return <CardBoxError
+            title="Aconteceu um erro"
+            description="Não foi possivel carregar os servidor, tente novamente!"
+        />
+    }
+
+    return loading ? <CardBoxServerLoading/>
+        : error ? renderError()
+        : (data.length == 0) ? renderEmptyContent()
+        : renderContent()
 }
