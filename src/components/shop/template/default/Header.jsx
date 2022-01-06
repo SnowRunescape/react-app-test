@@ -21,10 +21,10 @@ export default (props) => {
 
                         <HeaderRight>
                             <ul>
-                                <li><Link to="/">Início</Link></li>
-                                <li><Link to="/shop">Loja</Link></li>
-                                <li><Link to="/rules">Regras</Link></li>
-                                <li><Link to="/team">Equipe</Link></li>
+                                <li><Link to="/"><img src={store.customizations.menu.home.image} width={26}/> Início</Link></li>
+                                <li><Link to="/shop"><img src={store.customizations.menu.shop.image} width={26}/>Loja</Link></li>
+                                <li><Link to="/rules"><img src={store.customizations.menu.rules.image} width={26}/>Regras</Link></li>
+                                <li><Link to="/team"><img src={store.customizations.menu.team.image} width={26}/>Equipe</Link></li>
                             </ul>
 
                             <ul style={{display: "none"}}>
