@@ -36,9 +36,9 @@ async function getServers(force)
     return instance.servers
 }
 
-async function getServerProducts(force)
+async function getServerProducts(serverId, force)
 {
-    await api.get("/store/news")
+    return await api.get(`/store/server/${serverId}/products`)
 }
 
 async function getRules(force)

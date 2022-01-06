@@ -12,7 +12,6 @@ export default (props) => {
 
     let Template = template(store.template);
 
-    console.log(store.template, Template);
     if (!Template) {
         return "template nao localizado"
         // RENDER 503

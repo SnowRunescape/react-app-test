@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { CardBox } from '../layout/default/styles';
 import {useState, useLayoutEffect} from 'react'
-import StoreServer from '../components/shop/template/.global/StoreServer';
-import { getServers } from '../services/MinecartAPI'
+import { getServerProducts } from '../services/MinecartAPI'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import CardBoxError from '../components/shop/template/.global/CardBoxError';
 
 const StoreServers = styled(CardBox)`
     display: grid;
@@ -10,24 +11,50 @@ const StoreServers = styled(CardBox)`
     grid-gap: 16px;
 `;
 
-export default () => {
+export default (props) => {
+    const params = useParams()
+
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
+    function serverId()
+    {
+        return params.serverId.split("-")[0]
+    }
+
     useLayoutEffect (() => {
-        setData(getServers())
+        getServerProducts(serverId()).then(function (response) {
+            setData(response.data.products)
+            setLoading(false)
+        }).catch(function () {
+            setError(true)
+            setLoading(false)
+        })
     }, [])
 
-    if (loading) {
-        return ("caregando...");
+    const renderContent = () => {
+        return (
+            "teste..."
+        )
     }
 
-    if (error) {
-        return ("error...");
+    const renderEmptyContent = () => {
+        return <CardBoxError
+            title="Nenhum produto criado"
+            description="Não foi criado nenhum produto ate o momento!"
+        />
     }
 
-    return (
-        <div>teste</div>
-    )
+    const renderError = () => {
+        return <CardBoxError
+            title="Aconteceu um erro"
+            description="Não foi possivel carregar os produtos, tente novamente!"
+        />
+    }
+
+    return loading ? "carregando..."
+        : error ? renderError()
+        : (data.length == 0) ? renderEmptyContent()
+        : renderContent()
 }
