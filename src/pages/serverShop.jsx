@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 import { CardBox } from '../layout/default/styles';
 import {useState, useLayoutEffect} from 'react'
+import StoreServerProduct from '../components/shop/template/.global/StoreServerProduct';
 import { getServerProducts } from '../services/MinecartAPI'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import CardBoxError from '../components/shop/template/.global/CardBoxError';
+import StoreServerCash from '../components/shop/template/.global/StoreServerCash';
 
-const StoreServers = styled(CardBox)`
+const StoreServerProducts = styled(CardBox)`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 16px;
@@ -35,7 +37,15 @@ export default (props) => {
 
     const renderContent = () => {
         return (
-            "teste..."
+            <>
+                <StoreServerCash/>
+
+                <StoreServerProducts>
+                    {data.map(storeServerProduct => (
+                      <StoreServerProduct key={storeServerProduct.id} storeServerProduct={storeServerProduct}/>
+                    ))}
+                </StoreServerProducts>
+            </>
         )
     }
 

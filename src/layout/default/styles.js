@@ -43,6 +43,12 @@ export const HeaderRight = styled.div`
     ul {
         display: flex;
         gap: 12px;
+
+        li img {
+            width: 26px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
     }
 `
 
