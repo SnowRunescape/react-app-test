@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Header, HeaderContianer, HeaderLeft, HeaderRight, HeaderLogo, HeaderSlide, Container } from '../../../../layout/default/styles'
 
-export default ({store}) => {
+export default (props) => {
+    const { store } = props
+
     return (
         <>
             <Header {...store}>
@@ -25,9 +27,7 @@ export default ({store}) => {
                                 <li><Link to="/team">Equipe</Link></li>
                             </ul>
 
-                            <ul style={{
-                                display: "none"
-                            }}>
+                            <ul style={{display: "none"}}>
                                 <li><Link to="/cart"><img src="https://cdn.minecart.com.br/assets/img/store/icon-shopping-cart.png"/></Link></li>
                                 <li><img src="https://cdn.minecart.com.br/assets/img/store/icon-view-headline.png"/></li>
                             </ul>
@@ -37,7 +37,7 @@ export default ({store}) => {
             </Header>
 
             <HeaderSlide>
-                <img src={store.background}/>
+                <img src={store.customizations.background}/>
             </HeaderSlide>
         </>
     );

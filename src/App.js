@@ -13,28 +13,40 @@ const favicon = document.getElementById("favicon")
 
 export default () => {
   const [storeInstance, setStoreInstance] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
 
   useEffect (() => {
-    let store = getStore()
+    getStore().then(function (response) {
+        setStoreInstance(response.data)
+        setLoading(false)
+    }).catch(function (response) {
+        setError(true)
+        setLoading(false)
+    })
 
-    favicon.href = store.favicon
-
-    setStoreInstance(store)
+    favicon.href = storeInstance.favicon
   }, [])
 
-  if (storeInstance.length ==0) {
-    return "carregando";
+  const renderContent = () => {
+    return (
+      <Router>
+        <Layout exact path="/" store={storeInstance} component={Index} />
+        <Layout exact path="/shop" store={storeInstance} component={Server} />
+        <Layout path="/shop/:shop" store={storeInstance} renderSideBar={renderSideBar()} component={ServerShop} />
+        <Layout path="/rules" store={storeInstance} component={Rule} />
+        <Layout path="/team" store={storeInstance} component={Team} />
+      </Router>
+    )
   }
 
-  return (
-    <Router>
-      <Layout exact path="/" store={storeInstance} component={Index} />
-      <Layout exact path="/shop" store={storeInstance} component={Server} />
-      <Layout path="/shop/:shop" store={storeInstance} renderSideBar={renderSideBar()} component={ServerShop} />
-      <Layout path="/rules" store={storeInstance} component={Rule} />
-      <Layout path="/team" store={storeInstance} component={Team} />
-    </Router>
-  );
+  const renderError = () => {
+      return "erro.."
+  }
+
+  return loading ? "carregando..."
+    : error ? renderError()
+    : renderContent()
 }
 
 function renderSideBar()

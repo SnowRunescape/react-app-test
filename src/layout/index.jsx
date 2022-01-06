@@ -10,9 +10,11 @@ const templates = {
 export default (props) => {
     const {path, exact, store, component: Component} = props
 
-    let Template = template(store.layout);
+    let Template = template(store.template);
 
+    console.log(store.template, Template);
     if (!Template) {
+        return "template nao localizado"
         // RENDER 503
     }
 
@@ -25,7 +27,7 @@ export default (props) => {
     )
 }
 
-function template(layout)
+function template(template)
 {
-    return templates[layout]
+    return templates["default"]
 }

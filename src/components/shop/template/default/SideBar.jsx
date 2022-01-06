@@ -8,10 +8,10 @@ function renderContent(store)
 {
     return (
         <div style={{maxWidth: 310}}>
-            <Cart discordId={store.discord}/>
-            <Purchases discordId={store.discord}/>
-            <Twitter twitter={store.discord}/>
-            <Discord discord={store.discord}/>
+            <Cart discordId={store.widgets.discord.id}/>
+            <Purchases discordId={store.widgets.discord.id}/>
+            <Twitter twitter={store.widgets.discord.id}/>
+            <Discord discord={store.widgets.discord.id}/>
         </div>
     )
 }
@@ -25,7 +25,7 @@ function Cart()
 
 function Discord({discord})
 {
-    return (discord.length > 0) ? (
+    return (discord > 0) ? (
         <div>
             <iframe src={`https://discordapp.com/widget?id=${discord}&theme=dark`} width="100%" height="415" allowtransparency="true" frameBorder="0"/>
         </div>

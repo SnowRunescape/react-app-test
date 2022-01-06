@@ -8,20 +8,13 @@ export {
     getStore, getNews, getServers, getServerProducts, getRules, getTeams
 }
 
-function getStore(force)
+async function getStore(force)
 {
-    return {
-        name: "Minecart",
-        storeIp: "jogar.snowdev.com.br",
-        discord: "451861943364616192",
-        layout: "default",
-        logo: "https://cdn.minecart.com.br/assets/img/logo.png",
-        background: "https://cdn.minecart.com.br/assets/img/slide/slide-default-1.png",
-        favicon: "https://cdn.minecart.com.br/favicon.ico",
-        colors: {
-          navbar: "#662780"
-        }
+    if (!instance.store || force) {
+        instance.store = await api.get("/store")
     }
+
+    return instance.store
 }
 
 async function getNews(force)

@@ -19,7 +19,7 @@ export const CardBox = styled.div`
 
 export const Header = styled.header`
     position: fixed;
-    background: ${store => store.colors.navbar};
+    background: ${store => store.customizations.colors['--color1']};
     width: 100%;
     padding: 16px;
     color: #fff;
