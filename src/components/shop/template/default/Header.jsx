@@ -21,10 +21,10 @@ export default (props) => {
 
                         <HeaderRight>
                             <ul>
-                                <li><Link to="/"><img src={store.customizations.menu.home.image} width={26}/> Início</Link></li>
-                                <li><Link to="/shop"><img src={store.customizations.menu.shop.image} width={26}/>Loja</Link></li>
-                                <li><Link to="/rules"><img src={store.customizations.menu.rules.image} width={26}/>Regras</Link></li>
-                                <li><Link to="/team"><img src={store.customizations.menu.team.image} width={26}/>Equipe</Link></li>
+                                {store.customizations.menu.home.enable ? <li><Link to="/"><img src={store.customizations.menu.home.image}/> Início</Link></li> : null}
+                                {store.customizations.menu.shop.enable ? <li><Link to="/shop"><img src={store.customizations.menu.shop.image}/>Loja</Link></li> : null}
+                                {store.customizations.menu.rules.enable ? <li><Link to="/rules"><img src={store.customizations.menu.rules.image}/>Regras</Link></li> : null}
+                                {store.customizations.menu.team.enable ? <li><Link to="/team"><img src={store.customizations.menu.team.image}/>Equipe</Link></li> : null}
                             </ul>
 
                             <ul style={{display: "none"}}>
