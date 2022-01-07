@@ -42,7 +42,7 @@ export default (props) => {
 
                 <StoreServerProducts>
                     {data.map(storeServerProduct => (
-                      <StoreServerProduct key={storeServerProduct.id} storeServerProduct={storeServerProduct}/>
+                      <StoreServerProduct key={storeServerProduct.id} storeServerProduct={storeServerProduct} {...props}/>
                     ))}
                 </StoreServerProducts>
             </>

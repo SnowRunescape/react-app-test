@@ -1,14 +1,24 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
-const StoreServer = styled.div`
+const StoreServerProduct = styled.div`
     position: relative;
     background: #ecf0f3;
     text-align: center;
-
     border-radius: 5px;
-    transition: .4s;
-    cursor: pointer;
+
+    .price {
+        background: #90ee90;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: .8px;
+        border-bottom-left-radius: 8px;
+        border-top-right-radius: 5px;
+        padding: 4px 6px;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+    }
 
     .logo {
         width: 60%;
@@ -23,51 +33,66 @@ const StoreServer = styled.div`
             max-height: 100%;
             top: 50%;
             transform: translate(0px,-50%);
+            filter: drop-shadow(-5px 5px 7px rgba(0,0,0,0.5));
         }
     }
 
-    .serverName {
+    .container {
         font-size: 20px;
         font-weight: 600;
         padding: 8px;
         height: 64px;
 
-        span {
+        .name {
             position: relative;
-
+            width: 100%;
             top: 50%;
-
-
+            left: 50%;
+            transform: translate(-50%,-50%);
             color: #333;
         }
     }
 
-    :hover {
-        background: #dce7ef;
-    }
+    .buttons {
+        a {
+            display: block;
+            padding: 16px;
+            text-align: center;
+            transition: .4s;
+            cursor: pointer;
+        }
 
-    :not(:first-of-type) {
-        margin-top: 0px;
+        .details {
+            background: ${store => store.customizations.colors['--color1']};
+            color: var(--fontColor1);
+        }
+
+        .addToCard {
+            background: #28a745;
+            color: #fff;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
     }
 `;
 
 export default (props) => {
-    const { storeServerProduct } = props
+    const { store, storeServerProduct } = props
 
     return (
-        <StoreServer>
-            <Link to={`/shop/${storeServerProduct.id}-${storeServerProduct.server_name_slug}`}>
-                <div className="logo">
-                    <img src={storeServerProduct.server_logo} onError={({ currentTarget }) => {
-                        currentTarget.onerror  = null;
-                        currentTarget.src = "https://cdn.minecart.com.br/assets/img/cube-server.png";
-                    }}/>
-                </div>
+        <StoreServerProduct {...store}>
+            <div className="price">R$ 9,99</div>
+            <div className="logo">
+                <img src={storeServerProduct.image}/>
+            </div>
+            <div className="container">
+                <div className="name">{storeServerProduct.name}</div>
+            </div>
 
-                <div className="serverName">
-                    <span>{storeServerProduct.server_name}</span>
-                </div>
-            </Link>
-        </StoreServer>
+            <div className="buttons">
+                <a className="details" onClick="">Detalhes</a>
+                <a className="addToCard" onClick="">Adicionar ao carrinho</a>
+            </div>
+        </StoreServerProduct>
     )
 }
