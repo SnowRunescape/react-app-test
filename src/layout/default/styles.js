@@ -66,9 +66,10 @@ export const HeaderSlide = styled.div`
 `;
 
 export const Main = styled.div`
+    margin-top: 16px;
     display: flex;
     justify-content: space-between;
-    gap: 12px;
+    gap: 16px;
 `;
 
 export const MainBody = styled.div`
