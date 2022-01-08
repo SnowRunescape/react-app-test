@@ -82,9 +82,11 @@ export default (props) => {
     return (
         <StoreServerProduct {...store}>
             <div className="price">R$ 9,99</div>
+
             <div className="logo">
                 <img src={storeServerProduct.image}/>
             </div>
+
             <div className="container">
                 <div className="name">{storeServerProduct.name}</div>
             </div>

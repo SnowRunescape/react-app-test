@@ -4,7 +4,9 @@ import { getNews } from '../services/MinecartAPI'
 import CardBoxNewsLoading from '../components/shop/template/.global/News/CardBoxNewsLoading'
 import CardBoxError from '../components/shop/template/.global/CardBoxError'
 
-export default ({store}) => {
+export default (props) => {
+    const { store } = props;
+
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
@@ -28,7 +30,7 @@ export default ({store}) => {
             <>
                 {
                     data.map(news => (
-                        <CardBoxNews key={news.id} news={news}></CardBoxNews>
+                        <CardBoxNews key={news.id} news={news} {...props}></CardBoxNews>
                     ))
                 }
             </>
