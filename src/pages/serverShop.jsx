@@ -6,14 +6,18 @@ import { getServerProducts } from '../services/MinecartAPI'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import CardBoxError from '../components/shop/template/.global/CardBoxError';
 import StoreServerCash from '../components/shop/template/.global/StoreServerCash';
+import StoreServerCategories from '../components/shop/template/.global/StoreServerCategories';
 
 const StoreServerProducts = styled(CardBox)`
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 16px;
 `;
 
 export default (props) => {
+    const { store } = props
+
     const params = useParams()
 
     const [data, setData] = useState([])
@@ -26,6 +30,8 @@ export default (props) => {
     }
 
     useLayoutEffect (() => {
+        document.title = `${store.name} | Loja`
+
         getServerProducts(serverId()).then(function (response) {
             setData(response.data.products)
             setLoading(false)
@@ -40,11 +46,15 @@ export default (props) => {
             <>
                 <StoreServerCash/>
 
-                <StoreServerProducts>
-                    {data.map(storeServerProduct => (
-                      <StoreServerProduct key={storeServerProduct.id} storeServerProduct={storeServerProduct} {...props}/>
-                    ))}
-                </StoreServerProducts>
+                <div style={{display: 'flex', gap: 16}}>
+                    <StoreServerCategories {...props}/>
+
+                    <StoreServerProducts>
+                        {data.map(storeServerProduct => (
+                          <StoreServerProduct key={storeServerProduct.id} storeServerProduct={storeServerProduct} {...props}/>
+                        ))}
+                    </StoreServerProducts>
+                </div>
             </>
         )
     }
