@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { CardBox } from '../layout/default/styles';
-import {useState, useEffect} from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import { getRules } from '../services/MinecartAPI'
 import StoreRule from '../components/shop/template/.global/StoreRule';
 
@@ -9,7 +9,9 @@ const StoreRules = styled(CardBox)`
     grid-gap: 16px;
 `;
 
-export default () => {
+export default (props) => {
+    const { store } = props
+
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
@@ -22,6 +24,10 @@ export default () => {
             setError(true)
             setLoading(false)
         })
+    }, [])
+
+    useLayoutEffect (() => {
+        document.title = `${store.name} | Regras`
     }, [])
 
     if (loading) {

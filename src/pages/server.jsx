@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { CardBox } from '../layout/default/styles';
-import {useState, useLayoutEffect} from 'react'
+import { useState, useLayoutEffect } from 'react'
 import StoreServer from '../components/shop/template/.global/StoreServer';
 import { getServers } from '../services/MinecartAPI'
 import CardBoxError from '../components/shop/template/.global/CardBoxError';
@@ -12,12 +12,16 @@ const StoreServers = styled(CardBox)`
     grid-gap: 16px;
 `;
 
-export default () => {
+export default (props) => {
+    const { store } = props
+
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useLayoutEffect (() => {
+        document.title = `${store.name} | Servidores`
+
         getServers().then(function (response) {
             setData(response.data.servers)
             setLoading(false)
