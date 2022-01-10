@@ -1,7 +1,14 @@
 * {
     padding: 0px;
     margin: 0px;
-    font-family: montserrat,sans-serif;
+    font-family: montserrat, sans-serif;
     box-sizing: border-box;
     text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+a {
+    color: unset;
 }
