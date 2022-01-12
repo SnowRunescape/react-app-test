@@ -8,6 +8,7 @@ import Team from './pages/team'
 import Layout from "./layout";
 import './App.css'
 import { getStore } from "./services/MinecartAPI";
+import StoreNotFound from './layout/error/StoreNotFound'
 
 const favicon = document.getElementById("favicon")
 
@@ -41,7 +42,7 @@ export default () => {
   }
 
   const renderError = () => {
-      return "erro.."
+      return <StoreNotFound/>
   }
 
   return loading ? "carregando..."
